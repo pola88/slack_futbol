@@ -1,0 +1,26 @@
+{
+  "name": "slack-photobot",
+  "version": "0.0.1",
+  "description": "Slack Photoshop Bot",
+  "main": "run.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-slack-upload": "^1.0.3",
+    "request": "^2.57.0",
+    "ws": "^0.7.2",
+    "dotenv": "1.1.0",
+    "babel": "5.6.10",
+    "lodash": "3.10.0",
+    "pg": "4.4.0",
+    "q": "1.4.1"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
