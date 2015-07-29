@@ -43,6 +43,11 @@ export default class Connection {
       return;
     }
 
+    //remove the mention bot
+    if(this.isForMe(payload.text)) {
+      payload.text = payload.text.replace(/<@U089DHV6J>/gi, '');
+    }
+
     try {
       this.send(command)
     } catch(e) {
