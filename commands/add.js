@@ -46,6 +46,10 @@ export default class Add extends Command {
   }
 
   _insert(userId) {
+    if(!user_id) {
+      return this.currentPromise.resolve(this._buildPayload('Me estas haciendo perder el tiempo, fijate lo que escribiste.'));
+    }
+
     let query = 'SELECT count(*) FROM players;';
 
     pgConnection.query( query, (error, result) => {
