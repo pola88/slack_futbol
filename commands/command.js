@@ -18,7 +18,7 @@ export default class Command {
     return this._payload;
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     deferred.resolve(this._payload);

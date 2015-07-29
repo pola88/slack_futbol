@@ -14,7 +14,7 @@ export default class Time extends Command {
     return regExp.test(text);
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     deferred.resolve(this._buildPayload('8:45'));

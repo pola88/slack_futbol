@@ -74,7 +74,7 @@ export default class Add extends Command {
     });
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     let regExp = new RegExp(/.*(juega).*/,'i');

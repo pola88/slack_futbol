@@ -14,7 +14,7 @@ export default class Help extends Command {
     return regExp.test(text);
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     let text = "Vos decime y te digo: \n";

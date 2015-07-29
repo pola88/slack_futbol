@@ -17,13 +17,10 @@ export default class Connection {
     console.log('Connected');
   }
 
-  send(command) {
-    command.buildPayload()
-           .then( payload => {
-             let message = JSON.stringify(payload);
-             console.log('Send: ', message);
-             this.ws.send(message);
-           });
+  send(payload) {
+   let message = JSON.stringify(payload);
+   console.log('Send: ', message);
+   this.ws.send(message);
   }
 
   incomingMessage(payload) {
@@ -49,7 +46,10 @@ export default class Connection {
     }
 
     try {
-      this.send(command)
+      command.run()
+             .then( payload => {
+                this.send(payload);
+             });
     } catch(e) {
       console.error("Error: ", e);
     }

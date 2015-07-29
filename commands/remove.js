@@ -52,7 +52,7 @@ export default class Remove extends Command {
     });
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     let regExp = new RegExp(/.*(baja <@.*>).*/,'i');

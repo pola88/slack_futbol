@@ -16,7 +16,7 @@ export default class List extends Command {
     return regExp.test(text);
   }
 
-  buildPayload() {
+  run() {
     let deferred = Q.defer();
 
     pgConnection.query("SELECT * FROM players", (error, result) => {
