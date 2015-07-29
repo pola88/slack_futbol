@@ -12,7 +12,7 @@ export default class Add extends Command {
   }
 
   static is(text) {
-    let regExp = new RegExp(/.*^(juego|juega).*/,'i');
+    let regExp = new RegExp(/.*(juego|juega).*/,'i');
 
     return regExp.test(text);
   }
