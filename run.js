@@ -1,7 +1,6 @@
 import Slack from 'node-slack-upload';
 import Connection from './connection';
 import request from "request";
-import pgConnection from "./lib/pg/connection";
 
 exports.start = function() {
   let apiToken = process.env.PBOT_APITOKEN;
