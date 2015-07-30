@@ -1,7 +1,6 @@
-import Command from './command';
+import Command from "./command";
 import pgConnection from "../lib/pg/connection";
-import Q from 'q';
-import _ from 'lodash';
+import Q from "q";
 
 export default class Remove extends Command {
 
@@ -12,7 +11,7 @@ export default class Remove extends Command {
   }
 
   static is(text) {
-    let regExp = new RegExp(/.*(baja).*/,'i');
+    let regExp = new RegExp(/.*(baja).*/, "i");
 
     return regExp.test(text);
   }
@@ -26,11 +25,11 @@ export default class Remove extends Command {
   }
 
   _getUserId(text) {
-    let regExp = new RegExp(/.*<@(.*)>.*/,'i');
+    let regExp = new RegExp(/.*<@(.*)>.*/, "i");
     let userId = regExp.exec(text);
 
     if(!userId) {
-      return this.currentPromise.resolve(this._buildPayload('Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo. (Agrega @)'));
+      return this.currentPromise.resolve(this._buildPayload("Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo. (Agrega @)"));
     }
 
     return userId[1];
@@ -46,17 +45,17 @@ export default class Remove extends Command {
   }
 
   _remove(userId) {
-    let query = `DELETE FROM players WHERE user_id = '${userId}';`;
-    pgConnection.query( query, (error, result) => {
-      return this.currentPromise.resolve(this._buildPayload('Todo Pasa.'));
+    let query = `DELETE FROM players WHERE user_id = "${userId}";`;
+    pgConnection.query( query, () => {
+      return this.currentPromise.resolve(this._buildPayload("Todo Pasa."));
     });
   }
 
   run() {
     let deferred = Q.defer();
 
-    let regExp = new RegExp(/.*(baja <@.*>).*/,'i');
-    let anotherPlayer = regExp.test(this.payload.text)
+    let regExp = new RegExp(/.*(baja <@.*>).*/, "i");
+    let anotherPlayer = regExp.test(this.payload.text);
 
     this.currentPromise = deferred;
 

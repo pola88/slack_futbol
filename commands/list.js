@@ -1,7 +1,7 @@
-import Command from './command';
+import Command from "./command";
 import pgConnection from "../lib/pg/connection";
-import Q from 'q';
-import _ from 'lodash';
+import Q from "q";
+import _ from "lodash";
 
 export default class List extends Command {
 
@@ -11,7 +11,7 @@ export default class List extends Command {
   }
 
   static is(text) {
-    let regExp = new RegExp(/.*(quienes|lista|jugadores).*/,'i');
+    let regExp = new RegExp(/.*(quienes|lista|jugadores).*/, "i");
 
     return regExp.test(text);
   }
@@ -22,13 +22,13 @@ export default class List extends Command {
     pgConnection.query("SELECT * FROM players", (error, result) => {
       let players = result.rows;
       if(_.isEmpty(players)) {
-        deferred.resolve(this._buildPayload('Todos putos, nadie juega!!'));
+        deferred.resolve(this._buildPayload("Todos putos, nadie juega!!"));
       }
 
-      let userIds = _.pluck(players, 'user_id');
+      let userIds = _.pluck(players, "user_id");
       userIds = _.map(userIds, userId => { return `<@${userId}>`; } );
 
-      deferred.resolve(this._buildPayload('Por ahora los q juegan son: ' + userIds.join(', ') ));
+      deferred.resolve(this._buildPayload("Por ahora los q juegan son: " + userIds.join(", ") ));
     });
 
 

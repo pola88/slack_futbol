@@ -1,9 +1,9 @@
-import Q from 'q';
+import Q from "q";
 
 export default class Command {
   constructor(payload) {
     this._payload = payload;
-    this._name = 'Unnamed';
+    this._name = "Unnamed";
   }
 
   name() {
@@ -11,7 +11,7 @@ export default class Command {
   }
 
   static is(text) {
-    throw new Error('Not implemented');
+    throw new Error("Not implemented ", text);
   }
 
   get payload() {

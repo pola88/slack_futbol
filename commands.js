@@ -1,17 +1,16 @@
-import * as availableCommands from './commands/index';
-import _ from 'lodash';
-let validCommands = ['list', 'in', 'out', 'time'];
+import * as availableCommands from "./commands/index";
+import _ from "lodash";
 
 export default class Commands {
   static validate(payload) {
-    let currentCommand = null;
+    let CurrentCommand = null;
 
-    currentCommand = _.find(availableCommands, command => {
+    CurrentCommand = _.find(availableCommands, command => {
       return command.is(payload.text);
     });
 
-    if(currentCommand) {
-      currentCommand = new currentCommand(payload);
+    if(CurrentCommand) {
+      let currentCommand = new CurrentCommand(payload);
       console.log("Command: ", currentCommand.name());
       return currentCommand;
     } else {
