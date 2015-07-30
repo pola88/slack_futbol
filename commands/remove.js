@@ -30,7 +30,7 @@ export default class Remove extends Command {
     let userId = regExp.exec(text);
 
     if(!userId) {
-      return this.currentPromise.resolve(this._buildPayload('Falto el nombre, no me hagas perder el tiempo. (Agrega @)'));
+      return this.currentPromise.resolve(this._buildPayload('Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo. (Agrega @)'));
     }
 
     return userId[1];
