@@ -1,0 +1,33 @@
+module.exports = {
+  phrases: [
+     "Lo que tengo es razón. Tendría poder si haciendo las cosas mal me quedo. Pero no, las hago bien, tengo capacidad",
+     "El poder no es mío. Me lo dan. Los demás sienten que tengo poder y eso es lo que vale",
+     "Maradona habla de códigos y es el que menos tiene",
+     "Le tengo más miedo al lápiz y al micrófono que a un revólver",
+     "Yo practico el socialismo con plata, que es lo que me gusta. No el socialismo sin nada, que no sirve",
+     "No creo que ningún judío pueda ser árbitro de Primera, porque es difícil y a los judíos no les gustan los trabajos difíciles",
+     "Nunca voy a revelar la identidad de un barra brava porque no conozco ninguno",
+     "No me hablés de Ruggeri porque a ese le van a pegar un tiro en las piernas y si mi hija lo agarra le va a clavar un cuchillo",
+     "Ese señor (Juan Pablo II) es al que más admiro. Llegó conmigo el mismo año, aunque para él fue más fácil porque no tiene arcos",
+     "Aun sigo como presidente porque soy el menos malo",
+     "Voté por Qatar, sí. Porque si le daba el voto a Estados Unidos era como dárselo a Inglaterra. Y eso no",
+     "La AFA parece el conventillo de La Paloma",
+     "Está mal decir torneos cortos. Es un torneo con dos campeones",
+     "Cuando yo llegue a la AFA la droga se usaba para sacar ventajas deportivas",
+     "A esta altura me doy cuenta de que muchos a los que les abrí las puertas me atacaron por la espalda",
+     "Todos los que están dentro de la Selección, en la cabeza, cuando están tienen mi apoyo; si no, no estarían",
+     "El éxodo compulsivo de jugadores y, en consecuencia, el deterioro del campeonato local es por culpa del país",
+     "Me afilié a la UCR en 1962, quizá como un acto de agradecimiento hacia Victorio Daste, un caudillo de Sarandí que nos había ayudado mucho en Arsenal. Eso no significa que me haya afiliado como una concesión. No. Lo hice con mucho placer porque coincidía con los ideales",
+     "Hace tiempo que no hablo porque los años te hacen reflexionar, y cuanto menos hablás, menos problemas tenés. Hoy está todo tergiversado, han cambiado tanto las cosas, para que no malentiendan es cuestión de callarse un poquito los que somos los más viejos, para que aprendan los jóvenes",
+     "¿A la selección? Es fácil: agarrás Qatar 95, agarrás Malasia 97, agarrás Argentina 2001 y la armás. Si con eso no ganamos, me corto las...",
+     "He vivido 80 años y he hecho lo que me gusta. Muchos chicos no han nacido y yo ya era presidente de AFA y hoy tienen un micrófono y no saben lo que dicen. Hasta pueden ofenderte...",
+     "Pueden ocurrir muchas cosas, pero son muy difíciles de probar. Hay cosas que se dicen a la ligera, pero pueden ser como no pueden ser",
+     "Me di cuenta de que también en el fútbol existe la traición. Yo pensaba que era un deporte sano, que yo conocí desde el seno familiar en Arsenal y después en Independiente, donde jamás existieron cosas raras",
+     "Me quisieron traicionar, pero sigo adelante porque mi gestión es un éxito rotundo",
+     "Yo sé que alguno tiene el teléfono de arriba para ganar en los penales, pero yo también debo tener algún número, de allá, para tener todo lo que conseguí",
+     "Lo que tengo es razón. Tendría poder si haciendo las cosas mal me quedo. Pero no, las hago bien, tengo capacidad",
+     "No creo que ningún judío pueda ser árbitro de Primera, porque es difícil y a los judíos no les gustan los trabajos difíciles",
+     "Fíjense adonde están los que me han querido sacar deslealmente",
+     "Aun sigo como presidente porque soy el menos malo"
+  ]
+};

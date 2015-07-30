@@ -22,6 +22,7 @@ export default class Help extends Command {
     text += "* `quienes` `lista` `jugadores` _Quienes juegan_ \n";
     text += "* `juego` `juega @usuario` _Si jugas o agregas a alguno_ \n";
     text += "* `baja` `baja @usuario` _Si te bajas o si no juega alguno_ \n";
+    text += "* `frases` _Te dira algo sabio de la vida (o no)_ \n";
 
     deferred.resolve(this._buildPayload(text));
 
