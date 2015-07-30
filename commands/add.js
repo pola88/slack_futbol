@@ -46,7 +46,7 @@ export default class Add extends Command {
   }
 
   _insert(userId) {
-    if(!user_id) {
+    if(!userId) {
       return this.currentPromise.resolve(this._buildPayload('Me estas haciendo perder el tiempo, fijate lo que escribiste.'));
     }
 
