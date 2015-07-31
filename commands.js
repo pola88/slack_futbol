@@ -11,7 +11,7 @@ export default class Commands {
 
     if(CurrentCommand) {
       let currentCommand = new CurrentCommand(payload);
-      console.log("Command: ", currentCommand.name());
+      console.log("Command: ", currentCommand.name);
       return currentCommand;
     } else {
       return null;

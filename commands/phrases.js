@@ -10,7 +10,7 @@ export default class Phrase extends Command {
   }
 
   static is(text) {
-    let regExp = new RegExp(/.*(frases).*/, "i");
+    let regExp = new RegExp(/.*(frase(s)?).*/, "i");
 
     return regExp.test(text);
   }

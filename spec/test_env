@@ -1,0 +1,6 @@
+PBOT_APITOKEN=zarasa
+DBNAME=gronpola_test
+DBUSER=pola
+DBPWD=
+DBPORT=5432
+DBHOST=localhost

@@ -5,7 +5,9 @@
   "main": "run.js",
   "scripts": {
     "start": "node app.js",
-    "test": "eslint ./commands.js ./connection.js ./commands/* ./spec && node spec/spec_runner.js"
+    "test": "npm run lint && npm run spec",
+    "lint": "eslint ./commands.js ./connection.js ./commands/* ./spec",
+    "spec": "node spec/spec_runner.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "jasmine": "2.2.1",
     "jasmine-spec-reporter": "2.1.0",
+    "jasmine-before-all": "0.1.0",
     "eslint": "0.22.1",
     "babel-eslint": "4.0.5"
   }

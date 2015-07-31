@@ -1,5 +1,8 @@
 require("babel/register");
 process.env.NODE_ENV = "test";
+var path = require("path");
+require("dotenv").config({path: path.join(__dirname, "test_env") });
+
 var Jasmine = require("jasmine");
 var JasmineSpecReporter = require("jasmine-spec-reporter");
 

@@ -28,7 +28,9 @@
     "it": false,
     "jasmine": true,
     "beforeEach": false,
+    "beforeAll": false,
     "expect": false,
+    "spyOn": false,
     "afterEach": false
   }
 }

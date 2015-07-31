@@ -30,7 +30,7 @@ export default class Add extends Command {
     let userId = regExp.exec(text);
 
     if(!userId) {
-      return this.currentPromise.resolve(this._buildPayload("Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo. (Agregalo con @)"));
+      return this.currentPromise.resolve(this._buildPayload("Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo."));
     }
 
     return userId[1];
@@ -58,14 +58,14 @@ export default class Add extends Command {
         return this.currentPromise.resolve(this._buildPayload("Tarde!! Ya estamos los 12!! Pero todo tiene un precio :wink:"));
       }
 
-      query = `SELECT * FROM players WHERE user_id = "${userId}";`;
+      query = `SELECT * FROM players WHERE user_id = '${userId}';`;
       pgConnection.query( query, (selectError, selectResult) => {
         let player = selectResult.rows;
         if(!_.isEmpty(player)) {
           return this.currentPromise.resolve(this._buildPayload("Ya estas anotado pibe, gracias que podes \"correr\" y queres jugar por 2?"));
         }
 
-        query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ("${userId}","now()","now()"")`;
+        query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('${userId}','now()','now()')`;
 
         pgConnection.query( query, () => {
           this.currentPromise.resolve(this._buildPayload("Que viva el futbol!!"));

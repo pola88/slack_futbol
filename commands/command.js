@@ -6,12 +6,13 @@ export default class Command {
     this._name = "Unnamed";
   }
 
-  name() {
+  get name(){
     return this._name;
   }
 
   static is(text) {
-    throw new Error("Not implemented ", text);
+    console.log(text);
+    throw new Error("Not implemented");
   }
 
   get payload() {
@@ -21,7 +22,7 @@ export default class Command {
   run() {
     let deferred = Q.defer();
 
-    deferred.resolve(this._payload);
+    deferred.resolve(this._buildPayload(this._payload.text));
 
     return deferred.promise;
   }
