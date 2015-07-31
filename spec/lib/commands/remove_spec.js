@@ -1,5 +1,5 @@
-import pgConnection from "../../lib/pg/connection";
-import Remove from "../../commands/remove";
+import pgConnection from "../../../lib/pg/connection";
+import Remove from "../../../lib/commands/remove";
 
 require("jasmine-before-all");
 

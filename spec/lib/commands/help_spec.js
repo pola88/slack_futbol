@@ -1,4 +1,4 @@
-import Help from "../../commands/help";
+import Help from "../../../lib/commands/help";
 
 describe("Help command", () => {
   let payload;

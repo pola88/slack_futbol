@@ -1,5 +1,5 @@
-import List from "../../commands/list";
-import pgConnection from "../../lib/pg/connection";
+import List from "../../../lib/commands/list";
+import pgConnection from "../../../lib/pg/connection";
 
 describe("List command", () => {
   let payload;

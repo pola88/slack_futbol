@@ -1,4 +1,4 @@
-import Command from "../../commands/command";
+import Command from "../../../lib/commands/command";
 
 describe("Command command", () => {
   let payload;

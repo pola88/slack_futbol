@@ -1,5 +1,5 @@
-import pgConnection from "../../lib/pg/connection";
-import Add from "../../commands/add";
+import pgConnection from "../../../lib/pg/connection";
+import Add from "../../../lib/commands/add";
 import _ from "lodash";
 
 require("jasmine-before-all");

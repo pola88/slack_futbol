@@ -1,6 +1,6 @@
-import Commands from "../commands";
+import Commands from "../../lib/command";
 
-describe("Time command", () => {
+describe("Command command", () => {
   let payload;
 
   beforeEach(() => {
@@ -12,40 +12,40 @@ describe("Time command", () => {
               };
   });
 
-  describe("validate", () => {
+  describe("find", () => {
     it("returns Time command", () => {
       payload.text = "Hora";
-      expect(Commands.validate(payload).constructor.name).toEqual("Time");
+      expect(Commands.find(payload).constructor.name).toEqual("Time");
     });
 
     it("returns Add command", () => {
       payload.text = "Juego";
-      expect(Commands.validate(payload).constructor.name).toEqual("Add");
+      expect(Commands.find(payload).constructor.name).toEqual("Add");
     });
 
     it("returns Help command", () => {
       payload.text = "Help";
-      expect(Commands.validate(payload).constructor.name).toEqual("Help");
+      expect(Commands.find(payload).constructor.name).toEqual("Help");
     });
 
     it("returns List command", () => {
       payload.text = "Lista";
-      expect(Commands.validate(payload).constructor.name).toEqual("List");
+      expect(Commands.find(payload).constructor.name).toEqual("List");
     });
 
     it("returns Phrases command", () => {
       payload.text = "Frases";
-      expect(Commands.validate(payload).constructor.name).toEqual("Phrase");
+      expect(Commands.find(payload).constructor.name).toEqual("Phrase");
     });
 
     it("returns Remove command", () => {
       payload.text = "Baja";
-      expect(Commands.validate(payload).constructor.name).toEqual("Remove");
+      expect(Commands.find(payload).constructor.name).toEqual("Remove");
     });
 
     it("invalid command", () => {
       payload.text = "Fake";
-      expect(Commands.validate(payload)).toEqual(null);
+      expect(Commands.find(payload)).toEqual(null);
     });
   });
 });

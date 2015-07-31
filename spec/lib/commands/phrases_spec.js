@@ -1,4 +1,4 @@
-import Phrase from "../../commands/phrases";
+import Phrase from "../../../lib/commands/phrases";
 
 describe("Phrase command", () => {
   let payload;

@@ -1,5 +1,5 @@
 import Slack from 'node-slack-upload';
-import Connection from './connection';
+import Connection from './lib/connection';
 import request from "request";
 
 exports.start = function() {

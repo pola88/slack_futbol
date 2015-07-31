@@ -1,4 +1,4 @@
-import Time from "../../commands/time";
+import Time from "../../../lib/commands/time";
 
 describe("Time command", () => {
   let payload;
