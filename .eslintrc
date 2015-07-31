@@ -1,13 +1,5 @@
 // the following rules must be activated after the code is stable
-// - quotes
-// - camelcase
-// - no-alert
-// - no-unused-vars (JSX)
-// - handle-callback-err
-// - no-shadow
-// - comma-spacing
-// - no-multi-spaces
-// - key-spacing
+// - no-underscore-dangle
 {
   "parser": "babel-eslint",
   "ecmaFeatures": {

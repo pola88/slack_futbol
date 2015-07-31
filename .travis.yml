@@ -10,7 +10,7 @@ before_install:
   - npm install -g jasmine-node
 before_script:
   - psql -c 'create database gronpola;' -U postgres
-  - psql -f db/players.sql -U postgres -d gronpola
+  - psql -f ./db/tables.sql -U postgres -d gronpola
 script:
   - npm test
 env: DBNAME=gronpola DBUSER=postgres DBPWD= DBPORT=5432 DBHOST=localhost
