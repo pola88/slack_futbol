@@ -1,5 +1,7 @@
 ## Slack Futbol
 
+[![Build Status](https://travis-ci.org/pola88/slack_futbol.svg)](https://travis-ci.org/pola88/slack_futbol)
+
 ### Database Configuration
 
 This boot uses postgres.
