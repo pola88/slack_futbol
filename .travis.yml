@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "0.10.28"
+services:
+  - redis-server
+  - postgresql
+addons:
+  postgresql: "9.3"
+before_install:
+  - npm install -g jasmine-node
+before_script:
+  - psql -c 'create database gronpola;' -U postgres
+  - psql -f ./db/tables.sql -U postgres -d gronpola
+script:
+  - npm test
+env: DBNAME=gronpola DBUSER=postgres DBPWD= DBPORT=5432 DBHOST=localhost

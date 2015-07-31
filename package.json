@@ -4,7 +4,10 @@
   "description": "Slack Photoshop Bot",
   "main": "run.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "npm run lint && npm run spec",
+    "lint": "eslint ./lib/* ./spec",
+    "spec": "node spec/spec_runner.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +22,11 @@
     "request": "^2.57.0",
     "ws": "^0.7.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jasmine": "2.2.1",
+    "jasmine-spec-reporter": "2.1.0",
+    "jasmine-before-all": "0.1.0",
+    "eslint": "0.22.1",
+    "babel-eslint": "4.0.5"
+  }
 }
