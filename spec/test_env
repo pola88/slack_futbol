@@ -1,4 +1,6 @@
 PBOT_APITOKEN=zarasa
+SLACK_API=http://localhost:2999/api
+PBOT_ID=U089DHV6J
 DBNAME=gronpola_test
 DBUSER=pola
 DBPWD=

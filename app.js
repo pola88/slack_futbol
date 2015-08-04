@@ -6,13 +6,13 @@ dotenv.load();
 var pgConnection = require("./lib/pg/connection");
 
 if(!process.env.PBOT_APITOKEN) {
-  throw new Error('Missing Api Token');
+  throw new Error("Missing Api Token");
 }
 
 var app = express()
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3001
 
-app.get('/', function(req, res) {
+app.get("/", function(req, res) {
   res.send("What's up?");
 });
 

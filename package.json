@@ -16,10 +16,9 @@
     "dotenv": "1.1.0",
     "express": "^4.13.1",
     "lodash": "3.10.0",
-    "node-slack-upload": "^1.0.3",
     "pg": "4.4.0",
     "q": "1.4.1",
-    "request": "^2.57.0",
+    "request-promise": "0.4.3",
     "ws": "^0.7.2"
   },
   "devDependencies": {

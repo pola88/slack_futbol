@@ -16,6 +16,8 @@ Set the following variables to run the app (.env):
 
 ```
 PBOT_APITOKEN=yourToken
+SLACK_API=https://slack.com/api
+PBOT_ID=U089DHV6J
 DBNAME=gronpola
 DBUSER=user
 DBPWD=
