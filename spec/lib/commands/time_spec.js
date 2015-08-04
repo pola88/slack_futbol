@@ -48,7 +48,7 @@ describe("Time command", () => {
     it("returns the payload with text '8:45'", done => {
       time.run()
           .then( result => {
-            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "8:45", type: "message" });
+            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "Se juega a las 8:45!! y no es negociable.", type: "message" });
             done();
           });
     });
@@ -71,7 +71,7 @@ describe("Time command", () => {
       it("returns the payload with text '8:45' and current channel", done => {
         time.run()
             .then( result => {
-              expect(result).toEqual({ id: 2, channel: "anotherChannel", text: "8:45", type: "message" });
+              expect(result).toEqual({ id: 2, channel: "anotherChannel", text: "Se juega a las 8:45!! y no es negociable.", type: "message" });
               done();
             });
       });

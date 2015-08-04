@@ -1,6 +1,6 @@
 import Commands from "../../lib/command";
 
-describe("Command command", () => {
+describe("Command", () => {
   let payload;
 
   beforeEach(() => {

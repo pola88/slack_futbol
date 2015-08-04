@@ -28,6 +28,11 @@ app.get('/status', function(req, res) {
               });
 });
 
-app.listen(port);
+require('./run').start( function(connection) {
+  app.post('/api/time', function(req, res) {
+    connection.sendCommand({ text: "horario", channel: "C03CFASU7" })
+    res.json(200, { status: "ok" });
+  });
+});
 
-var run = require('./run').start();
+app.listen(port);
