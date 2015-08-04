@@ -23,6 +23,7 @@
     "beforeAll": false,
     "expect": false,
     "spyOn": false,
-    "afterEach": false
+    "afterEach": false,
+    "__ID__": true
   }
 }

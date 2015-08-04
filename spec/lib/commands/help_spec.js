@@ -36,6 +36,7 @@ describe("Help command", () => {
 
   describe("run", () => {
     beforeEach(() => {
+      GLOBAL.__ID__ = 1;
       help = new Help(payload);
       spyOn(help, "_buildPayload").and.callThrough();
     });
@@ -50,7 +51,7 @@ describe("Help command", () => {
             expectedText += "* `baja` `baja @usuario` _Si te bajas o si no juega alguno_ \n";
             expectedText += "* `frases` _Te dira algo sabio de la vida (o no)_ \n";
 
-            expect(result).toEqual({ channel: "C03CFASU7", text: expectedText, type: "message" });
+            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: expectedText, type: "message" });
             done();
           });
     });

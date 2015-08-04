@@ -48,6 +48,7 @@ describe("List command", () => {
 
     beforeAll(done => {
       jasmine.cleanDb( () => {
+        GLOBAL.__ID__ = 1;
         list = new List(payload);
         spyOn(list, "_buildPayload").and.callThrough();
 
@@ -74,8 +75,8 @@ describe("List command", () => {
     });
 
     it("returns the payload with the players", () => {
-      let expectedText = "Por ahora los q juegan son: <@a1>, <@a2>, <@a3>";
-      expect(result).toEqual({ channel: "C03CFASU7", text: expectedText, type: "message" });
+      let expectedText = "Por ahora los q juegan son: a1, a2, a3";
+      expect(result).toEqual({id: 1, channel: "C03CFASU7", text: expectedText, type: "message" });
     });
   });
 });

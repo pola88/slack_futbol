@@ -33,13 +33,14 @@ describe("Command command", () => {
   describe("run", () => {
     beforeEach(() => {
       command = new Command(payload);
+      GLOBAL.__ID__ = 1;
       spyOn(command, "_buildPayload").and.callThrough();
     });
 
     it("returns the payload with the same text", done => {
       command.run()
           .then( result => {
-            expect(result).toEqual({ channel: "C03CFASU7", text: "same text", type: "message" });
+            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "same text", type: "message" });
             done();
           });
     });
@@ -55,11 +56,23 @@ describe("Command command", () => {
 
   describe("_buildPayload", () => {
     beforeEach(() => {
+      GLOBAL.__ID__ = 1;
       command = new Command(payload);
     });
 
     it("build the payload with the text", () => {
-      expect(command._buildPayload("text changed")).toEqual({ channel: "C03CFASU7", text: "text changed", type: "message" });
+      expect(command._buildPayload("text changed")).toEqual({ id: 1, channel: "C03CFASU7", text: "text changed", type: "message" });
+    });
+
+    describe("calls twice incremente id", () => {
+      beforeEach(() => {
+        GLOBAL.__ID__ = 1;
+        command._buildPayload("with id 1");
+      });
+
+      it("returns with id 2", () => {
+        expect(command._buildPayload("text changed")).toEqual({ id: 2, channel: "C03CFASU7", text: "text changed", type: "message" });
+      });
     });
   });
 });
