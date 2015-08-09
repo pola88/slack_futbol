@@ -33,6 +33,11 @@ require('./run').start( function(connection) {
     connection.sendCommand({ text: "horario", channel: "C03CFASU7" })
     res.json(200, { status: "ok" });
   });
+
+  app.post('/api/start', function(req, res) {
+    connection.sendCommand({ text: "start", channel: "C03CFASU7" })
+    res.json(200, { status: "ok" });
+  });
 });
 
 app.listen(port);
