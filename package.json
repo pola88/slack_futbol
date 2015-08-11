@@ -19,7 +19,8 @@
     "pg": "4.4.0",
     "q": "1.4.1",
     "request-promise": "0.4.3",
-    "ws": "^0.7.2"
+    "ws": "^0.7.2",
+    "body-parser": "1.13.3"
   },
   "devDependencies": {
     "jasmine": "2.2.1",

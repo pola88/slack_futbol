@@ -1,6 +1,7 @@
 require("babel/register");
 var express = require("express");
 var dotenv = require('dotenv');
+var bodyParser = require('body-parser');
 dotenv.load();
 
 var pgConnection = require("./lib/pg/connection");
@@ -11,6 +12,8 @@ if(!process.env.PBOT_APITOKEN) {
 
 var app = express()
 var port = process.env.PORT || 3001
+
+app.use(bodyParser.json());
 
 app.get("/", function(req, res) {
   res.send("What's up?");
@@ -37,6 +40,17 @@ require('./run').start( function(connection) {
   app.post('/api/start', function(req, res) {
     connection.sendCommand({ text: "start", channel: "C03CFASU7" })
     res.json(200, { status: "ok" });
+  });
+
+  app.post('/api/msg', function(req, res) {
+    var msg = req.body.msg;
+
+    if(!msg) {
+      res.status(422).json({ error: "Missing message" });
+    }
+
+    connection.sendCommand({ text: "msg:" + msg, channel: "C03CFASU7" })
+    res.status(200).json({ status: "ok" });
   });
 });
 
