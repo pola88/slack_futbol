@@ -47,5 +47,20 @@ describe("Command", () => {
       payload.text = "Fake";
       expect(Commands.find(payload)).toEqual(null);
     });
+
+    it("returns Rain command", () => {
+      payload.text = "dicen que llueve";
+      expect(Commands.find(payload).constructor.name).toEqual("Rain");
+    });
+
+    it("returns Start command", () => {
+      payload.text = "start";
+      expect(Commands.find(payload).constructor.name).toEqual("Start");
+    });
+
+    it("returns Message command", () => {
+      payload.text = "msg:a que hora se juega? como siempre, lista, frases";
+      expect(Commands.find(payload).constructor.name).toEqual("Message");
+    });
   });
 });
