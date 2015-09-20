@@ -74,8 +74,8 @@ describe("Remove command", () => {
           expect(remove.me).toHaveBeenCalled();
         });
 
-        it("returns the payload with text 'Todo Pasa...'", () => {
-          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "Todo Pasa...", type: "message" });
+        it("returns the payload with text 'galgo: Posta te vas a bajar?'", () => {
+          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "galgo: Posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -111,7 +111,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Todo Pasa...", type: "message" });
+          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "galgo: Posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -163,8 +163,8 @@ describe("Remove command", () => {
           expect(remove.another).toHaveBeenCalled();
         });
 
-        it("returns the payload with text 'Todo Pasa...'", () => {
-          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "Todo Pasa...", type: "message" });
+        it("returns the payload with text 'galgo: Posta te vas a bajar?'", () => {
+          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "galgo: Posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -215,7 +215,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Todo Pasa...", type: "message" });
+          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "galgo: Posta te vas a bajar?", type: "message" });
         });
 
         it("does not remove the user who write", done => {
