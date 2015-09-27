@@ -14,19 +14,18 @@
   "dependencies": {
     "babel": "5.6.10",
     "dotenv": "1.1.0",
-    "express": "^4.13.1",
     "lodash": "3.10.0",
     "pg": "4.4.0",
     "q": "1.4.1",
     "request-promise": "0.4.3",
-    "ws": "^0.7.2",
-    "body-parser": "1.13.3"
+    "ws": "^0.7.2"
   },
   "devDependencies": {
     "jasmine": "2.2.1",
     "jasmine-spec-reporter": "2.1.0",
     "jasmine-before-all": "0.1.0",
     "eslint": "0.22.1",
-    "babel-eslint": "4.0.5"
+    "babel-eslint": "4.0.5",
+    "express": "^4.13.1"
   }
 }
