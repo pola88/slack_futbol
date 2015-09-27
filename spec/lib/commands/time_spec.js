@@ -64,14 +64,14 @@ describe("Time command", () => {
     describe("Different channel id", () => {
       beforeEach(() => {
         GLOBAL.__ID__ = 2;
-        payload.channel = "anotherChannel";
+        payload.channel = "C03CFASU7";
         time = new Time(payload);
       });
 
-      it("returns the payload with text '8:45' and current channel", done => {
+      it("returns the payload with text '8:45' and sends it to futbol channel", done => {
         time.run()
             .then( result => {
-              expect(result).toEqual({ id: 2, channel: "anotherChannel", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
+              expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
               done();
             });
       });
