@@ -52,7 +52,6 @@ describe("Remove command", () => {
       describe("first time", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('${payload.user}','now()','now()')`;
 
             pgConnection.query( query, () => {
@@ -75,7 +74,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with text 'galgo: Daaaa...posta te vas a bajar?'", () => {
-          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -93,7 +92,6 @@ describe("Remove command", () => {
       describe("The user has already been removed", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('${payload.user}','now()','now()')`;
 
             pgConnection.query( query, () => {
@@ -111,7 +109,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -137,7 +135,6 @@ describe("Remove command", () => {
       describe("first time", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('${userId}','now()','now()')`;
 
             pgConnection.query( query, () => {
@@ -164,7 +161,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with text 'galgo: Daaaa...posta te vas a bajar?'", () => {
-          expect(result).toEqual({ id: 1, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -193,7 +190,6 @@ describe("Remove command", () => {
       describe("The user has already been removeed", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('${userId}','now()','now()')`;
 
             pgConnection.query( query, () => {
@@ -215,7 +211,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
         });
 
         it("does not remove the user who write", done => {
@@ -233,7 +229,6 @@ describe("Remove command", () => {
       describe("invalid user", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             payload.text = `baja @fakeUser`;
             remove = new Remove(payload);
             remove.run()
@@ -248,7 +243,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
         });
 
         it("does not save the user who write", done => {
@@ -266,7 +261,6 @@ describe("Remove command", () => {
       describe("without @", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             payload.text = `baja fakeUser`;
             remove = new Remove(payload);
             remove.run()
@@ -281,7 +275,7 @@ describe("Remove command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
         });
 
         it("does not save the user who write", done => {

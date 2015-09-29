@@ -40,7 +40,6 @@ describe("Time command", () => {
 
   describe("run", () => {
     beforeEach(() => {
-      GLOBAL.__ID__ = 1;
       time = new Time(payload);
       spyOn(time, "_buildPayload").and.callThrough();
     });
@@ -48,7 +47,7 @@ describe("Time command", () => {
     it("returns the payload with text '8:45'", done => {
       time.run()
           .then( result => {
-            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
+            expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
             done();
           });
     });
@@ -63,15 +62,14 @@ describe("Time command", () => {
 
     describe("Different channel id", () => {
       beforeEach(() => {
-        GLOBAL.__ID__ = 2;
-        payload.channel = "C03CFASU7";
+        payload.channel = "fakeChannel";
         time = new Time(payload);
       });
 
       it("returns the payload with text '8:45' and sends it to futbol channel", done => {
         time.run()
             .then( result => {
-              expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
+              expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "cronica: Se juega a las 8:45!! y no es negociable.", type: "message" });
               done();
             });
       });

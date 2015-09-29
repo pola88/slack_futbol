@@ -61,7 +61,6 @@ describe("Add command", () => {
       describe("first time", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 2;
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "me").and.callThrough();
@@ -80,7 +79,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\"", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Que viva el futbol!!", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!!", type: "message" });
         });
 
         it("saves the user id", done => {
@@ -98,7 +97,6 @@ describe("Add command", () => {
       describe("Different channel id", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 10;
             payload.channel = "anotherChannel";
             add = new Add(payload);
             add.run()
@@ -110,14 +108,13 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\" and current channel", () => {
-          expect(result).toEqual({ id: 10, channel: "anotherChannel", text: "Que viva el futbol!!", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "anotherChannel", text: "Que viva el futbol!!", type: "message" });
         });
       });
 
       describe("The user has already been added", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 2;
             add = new Add(payload);
             add.run()
                 .then( () => {
@@ -131,7 +128,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 3, channel: "C03CFASU7", text: "Ya estas anotado pibe, gracias que podes \"correr\" y queres jugar por 2?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Ya estas anotado pibe, gracias que podes \"correr\" y queres jugar por 2?", type: "message" });
         });
 
         it("does not save the user id again", done => {
@@ -150,7 +147,6 @@ describe("Add command", () => {
       describe("with 12 players", () => {
         beforeAll(done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 2;
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
 
@@ -173,7 +169,7 @@ describe("Add command", () => {
         });
 
         it("returns the error text", () => {
-          expect(result).toEqual({id: 2, channel: "C03CFASU7", text: "Tarde!! Ya estamos los 12!! Pero todo tiene un precio :wink:", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Tarde!! Ya estamos los 12!! Pero todo tiene un precio :wink:", type: "message" });
         });
       });
     }); // with "juego"
@@ -188,7 +184,6 @@ describe("Add command", () => {
       describe("first time", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "another").and.callThrough();
@@ -207,7 +202,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\"", () => {
-          expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "Que viva el futbol!!", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!!", type: "message" });
         });
 
         it("saves the user id", done => {
@@ -236,7 +231,6 @@ describe("Add command", () => {
       describe("The user has already been added", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             add = new Add(payload);
             add.run()
                 .then( () => {
@@ -250,7 +244,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({id: 2, channel: "C03CFASU7", text: "Ya estas anotado pibe, gracias que podes \"correr\" y queres jugar por 2?", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Ya estas anotado pibe, gracias que podes \"correr\" y queres jugar por 2?", type: "message" });
         });
 
         it("does not save the user id again", done => {
@@ -269,7 +263,6 @@ describe("Add command", () => {
       describe("without user", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             payload.text = `juega`;
             add = new Add(payload);
             add.run()
@@ -284,7 +277,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({id: 2, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
         });
 
         it("does not save the user who write", done => {
@@ -302,7 +295,6 @@ describe("Add command", () => {
       describe("invalid user", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             payload.text = `juega @fakeUser`;
             add = new Add(payload);
             add.run()
@@ -317,7 +309,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({id: 2, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
         });
 
         it("does not save the user who write", done => {
@@ -335,7 +327,6 @@ describe("Add command", () => {
       describe("without @", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            GLOBAL.__ID__ = 1;
             payload.text = `juega fakeUser`;
             add = new Add(payload);
             add.run()
@@ -350,7 +341,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
         });
 
         it("does not save the user who write", done => {

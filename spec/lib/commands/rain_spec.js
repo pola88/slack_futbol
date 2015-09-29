@@ -44,7 +44,6 @@ describe("Rain command", () => {
 
   describe("run", () => {
     beforeEach(() => {
-      GLOBAL.__ID__ = 1;
       rain = new Rain(payload);
       spyOn(rain, "_buildPayload").and.callThrough();
     });
@@ -52,7 +51,7 @@ describe("Rain command", () => {
     it("returns the payload with text", done => {
       rain.run()
           .then( result => {
-            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "Quien dice q va a llover?? Va a estar soleado, perfecto para ver el buen futbol.", type: "message" });
+            expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Quien dice q va a llover?? Va a estar soleado, perfecto para ver el buen futbol.", type: "message" });
             done();
           });
     });

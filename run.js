@@ -11,7 +11,6 @@ exports.start = function(callback) {
          .then( body => {
                 let res = JSON.parse(body);
                 if (res.ok) {
-                  GLOBAL.__ID__ = 1;
                   connection = new Connection(res.url);
 
                   callback(connection);

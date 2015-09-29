@@ -40,7 +40,6 @@ describe("Message command", () => {
 
   describe("run", () => {
     beforeEach(() => {
-      GLOBAL.__ID__ = 1;
       message = new Message(payload);
       spyOn(message, "_buildPayload").and.callThrough();
     });
@@ -48,7 +47,7 @@ describe("Message command", () => {
     it("returns the payload with text 'Algo'", done => {
       message.run()
           .then( result => {
-            expect(result).toEqual({id: 1, channel: "C03CFASU7", text: "Algo", type: "message" });
+            expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
             done();
           });
     });
@@ -63,7 +62,6 @@ describe("Message command", () => {
 
     describe("Different channel id", () => {
       beforeEach(() => {
-        GLOBAL.__ID__ = 2;
         payload.channel = "anotherChannel";
         message = new Message(payload);
       });
@@ -71,7 +69,7 @@ describe("Message command", () => {
       it("returns the payload with text 'Alog' and channel 'C03CFASU7'", done => {
         message.run()
             .then( result => {
-              expect(result).toEqual({ id: 2, channel: "C03CFASU7", text: "Algo", type: "message" });
+              expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
               done();
             });
       });

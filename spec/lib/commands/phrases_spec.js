@@ -40,7 +40,6 @@ describe("Phrase command", () => {
 
   describe("run", () => {
     beforeEach(() => {
-      GLOBAL.__ID__ = 1;
       phrase = new Phrase(payload);
       spyOn(phrase, "_buildPayload").and.callThrough();
     });
@@ -48,7 +47,7 @@ describe("Phrase command", () => {
     it("returns the payload with text", done => {
       phrase.run()
           .then( result => {
-            expect(result.id).toEqual(1);
+            expect(result.id).toEqual(result.id);
             expect(result.channel).toEqual("C03CFASU7");
             expect(result.text).not.toEqual(undefined);
             expect(result.text).not.toEqual("");
@@ -62,7 +61,6 @@ describe("Phrase command", () => {
 
     describe("Different channel id", () => {
       beforeEach(() => {
-        GLOBAL.__ID__ = 2;
         payload.channel = "anotherChannel";
         phrase = new Phrase(payload);
       });
@@ -70,7 +68,7 @@ describe("Phrase command", () => {
       it("returns the payload with text and current channel", done => {
         phrase.run()
             .then( result => {
-              expect(result.id).toEqual(2);
+              expect(result.id).toEqual(result.id);
               expect(result.channel).toEqual("anotherChannel");
               expect(result.text).not.toEqual(undefined);
               expect(result.text).not.toEqual("");
