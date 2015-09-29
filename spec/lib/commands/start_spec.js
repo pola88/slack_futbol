@@ -42,7 +42,6 @@ describe("Start command", () => {
     describe("with 3 players", () => {
       beforeAll(done => {
         jasmine.cleanDb( () => {
-          GLOBAL.__ID__ = 1;
           start = new Start(payload);
           spyOn(start, "_buildPayload").and.callThrough();
 
@@ -69,7 +68,6 @@ describe("Start command", () => {
       });
 
       it("returns the payload with the players", () => {
-        expect(result.id).toEqual(1);
         expect(result.channel).toEqual("C03CFASU7");
         expect(result.type).toEqual("message");
         expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! por ahora somos 3: <@a1>, <@a2>, <@a3>. Se suma alguien\? Alguien se baja\?/);
@@ -79,7 +77,6 @@ describe("Start command", () => {
     describe("with 12 players", () => {
       beforeAll(done => {
         jasmine.cleanDb( () => {
-          GLOBAL.__ID__ = 1;
           start = new Start(payload);
           spyOn(start, "_buildPayload").and.callThrough();
 
@@ -107,7 +104,6 @@ describe("Start command", () => {
       });
 
       it("returns the payload with the players", () => {
-        expect(result.id).toEqual(1);
         expect(result.channel).toEqual("C03CFASU7");
         expect(result.type).toEqual("message");
         expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! ya estamos los 12: <@a1>, <@a2>, <@a3>, <@a4>, <@a5>, <@a6>, <@a7>, <@a8>, <@a9>, <@a10>, <@a11>, <@a12>. si alguien se baja, avise.../);
