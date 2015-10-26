@@ -8,7 +8,8 @@ exports.start = function(connection, callback) {
     onTick: function() {
       connection.sendCommand({ text: "start", channel: "C03CFASU7" });
     },
-    start: false
+    start: false,
+    timeZone: 'America/Argentina/Buenos_Aires'
   });
 
   callback();
