@@ -1,7 +1,7 @@
 {
-  "name": "slack-photobot",
+  "name": "slack-futbol",
   "version": "0.0.1",
-  "description": "Slack Photoshop Bot",
+  "description": "Gronpola Bot",
   "main": "run.js",
   "scripts": {
     "start": "node app.js",
