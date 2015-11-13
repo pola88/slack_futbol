@@ -12,5 +12,6 @@ exports.start = function(connection, callback) {
     timeZone: 'America/Argentina/Buenos_Aires'
   });
 
+  cleanJob.start();
   callback();
 }

@@ -49,6 +49,8 @@ describe("Help command", () => {
             expectedText += "* `juego` `juega @usuario` _Si jugas o agregas a alguno_ \n";
             expectedText += "* `baja` `baja @usuario` _Si te bajas o si no juega alguno_ \n";
             expectedText += "* `frases` _Te dira algo sabio de la vida (o no)_ \n";
+            expectedText += "* `random` _Te arma super equipos_ \n";
+            expectedText += "* `equipos` _Te muestra el ultimo gran random \n";
 
             expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: expectedText, type: "message" });
             done();

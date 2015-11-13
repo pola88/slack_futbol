@@ -357,4 +357,72 @@ describe("Add command", () => {
       }); //without @
     }); // with "juega usuario"
   }); // run
+
+  describe("after", () => {
+    describe("with captains", () => {
+      let result;
+
+      beforeAll(done => {
+        jasmine.cleanDb( () => {
+          add = new Add(payload);
+
+          let query = "INSERT INTO players (user_id, team, captain, created_at, updated_at) VALUES ('a1', 'A', true, 'now()','now()')";
+          pgConnection.query( query, () => {
+            query = "INSERT INTO players (user_id, team, created_at, updated_at) VALUES ('a2', 'B', 'now()','now()')";
+            pgConnection.query( query, () => {
+              query = "INSERT INTO players (user_id, team, captain, created_at, updated_at) VALUES ('a3', 'B', true, 'now()','now()')";
+              pgConnection.query( query, () => {
+                query = "INSERT INTO players (user_id, team, created_at, updated_at) VALUES ('a4', 'A', 'now()','now()')";
+                pgConnection.query( query, () => {
+                  add.after(payload)
+                     .then( res => {
+                      result = res;
+
+                      done();
+                     });
+                });
+              });
+            });
+          });
+        });
+      });
+
+      it("return text with captains", () => {
+        expect(result.text).toEqual("random <@a1> <@a1>");
+      });
+    });
+
+    describe("without captains", () => {
+      let result;
+
+      beforeAll(done => {
+        jasmine.cleanDb( () => {
+          add = new Add(payload);
+
+          let query = "INSERT INTO players (user_id, team, captain, created_at, updated_at) VALUES ('a1', 'A', false, 'now()','now()')";
+          pgConnection.query( query, () => {
+            query = "INSERT INTO players (user_id, team, created_at, updated_at) VALUES ('a2', 'B', 'now()','now()')";
+            pgConnection.query( query, () => {
+              query = "INSERT INTO players (user_id, team, captain, created_at, updated_at) VALUES ('a3', 'B', false, 'now()','now()')";
+              pgConnection.query( query, () => {
+                query = "INSERT INTO players (user_id, team, created_at, updated_at) VALUES ('a4', 'A', 'now()','now()')";
+                pgConnection.query( query, () => {
+                  add.after(payload)
+                     .then( res => {
+                      result = res;
+
+                      done();
+                     });
+                });
+              });
+            });
+          });
+        });
+      });
+
+      it("return text with captains", () => {
+        expect(result.text).toEqual("random");
+      });
+    });
+  });
 });
