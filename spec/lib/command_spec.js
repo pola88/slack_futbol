@@ -62,5 +62,15 @@ describe("Command", () => {
       payload.text = "msg:a que hora se juega? como siempre, lista, frases";
       expect(Commands.find(payload).constructor.name).toEqual("Message");
     });
+
+    it("returns Random command", () => {
+      payload.text = "random";
+      expect(Commands.find(payload).constructor.name).toEqual("Random");
+    });
+
+    it("returns Teams command", () => {
+      payload.text = "equipos";
+      expect(Commands.find(payload).constructor.name).toEqual("Teams");
+    });
   });
 });

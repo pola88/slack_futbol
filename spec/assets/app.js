@@ -8,7 +8,7 @@ var app = express();
 app.get("/api/users.info", function(req, res) {
   let userId = req.query.user;
 
-  res.json({ ok: true, user: { name: userId } } );
+  res.json({ ok: true, user: { id: userId, name: userId } } );
 });
 
 exports.start = function(readyCallback) {
