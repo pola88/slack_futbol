@@ -23,6 +23,7 @@ DBUSER=user
 DBPWD=
 DBPORT=5432
 DBHOST=localhost
+TELEGRAM_KEY=yourKey
 ```
 
 ### Run the bot:
