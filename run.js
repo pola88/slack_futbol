@@ -46,7 +46,7 @@ let telegram = function() {
 };
 
 exports.start = function(callback) {
-  // slack();
+  slack();
   telegram();
 
   callback();
