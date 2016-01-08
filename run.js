@@ -4,6 +4,7 @@ import cron from "./cron";
 import Q from "q";
 import TelegramBot from "node-telegram-bot-api";
 import TelegramCommands from "./lib/telegram";
+import Slack from './lib/models/slack';
 
 let slack = function(callback) {
   let deferred = Q.defer();
@@ -43,6 +44,8 @@ let telegram = function() {
   });
 
   bot.onText(/\/(.+)/, (msg, match) => telegramCommands.incomingMessage(msg, match));
+
+  bot.on('message', console.log);
 };
 
 exports.start = function(callback) {
