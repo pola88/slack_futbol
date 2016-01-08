@@ -2,8 +2,10 @@ import Commands from "../../lib/command";
 
 describe("Command", () => {
   let payload;
+  let commands;
 
   beforeEach(() => {
+    commands = new Commands(false);
     payload = { "type": "message",
                 "channel": "C03CFASU7",
                 "user": "U03BKS790",
@@ -15,62 +17,62 @@ describe("Command", () => {
   describe("find", () => {
     it("returns Time command", () => {
       payload.text = "Hora";
-      expect(Commands.find(payload).constructor.name).toEqual("Time");
+      expect(commands.find(payload).constructor.name).toEqual("Time");
     });
 
     it("returns Add command", () => {
       payload.text = "Juego";
-      expect(Commands.find(payload).constructor.name).toEqual("Add");
+      expect(commands.find(payload).constructor.name).toEqual("Add");
     });
 
     it("returns Help command", () => {
       payload.text = "Help";
-      expect(Commands.find(payload).constructor.name).toEqual("Help");
+      expect(commands.find(payload).constructor.name).toEqual("Help");
     });
 
     it("returns List command", () => {
       payload.text = "Lista";
-      expect(Commands.find(payload).constructor.name).toEqual("List");
+      expect(commands.find(payload).constructor.name).toEqual("List");
     });
 
     it("returns Phrases command", () => {
       payload.text = "Frases";
-      expect(Commands.find(payload).constructor.name).toEqual("Phrase");
+      expect(commands.find(payload).constructor.name).toEqual("Phrase");
     });
 
     it("returns Remove command", () => {
       payload.text = "Baja";
-      expect(Commands.find(payload).constructor.name).toEqual("Remove");
+      expect(commands.find(payload).constructor.name).toEqual("Remove");
     });
 
     it("invalid command", () => {
       payload.text = "Fake";
-      expect(Commands.find(payload)).toEqual(null);
+      expect(commands.find(payload)).toEqual(null);
     });
 
     it("returns Rain command", () => {
       payload.text = "dicen que llueve";
-      expect(Commands.find(payload).constructor.name).toEqual("Rain");
+      expect(commands.find(payload).constructor.name).toEqual("Rain");
     });
 
     it("returns Start command", () => {
       payload.text = "start";
-      expect(Commands.find(payload).constructor.name).toEqual("Start");
+      expect(commands.find(payload).constructor.name).toEqual("Start");
     });
 
     it("returns Message command", () => {
       payload.text = "msg:a que hora se juega? como siempre, lista, frases";
-      expect(Commands.find(payload).constructor.name).toEqual("Message");
+      expect(commands.find(payload).constructor.name).toEqual("Message");
     });
 
     it("returns Random command", () => {
       payload.text = "random";
-      expect(Commands.find(payload).constructor.name).toEqual("Random");
+      expect(commands.find(payload).constructor.name).toEqual("Random");
     });
 
     it("returns Teams command", () => {
       payload.text = "equipos";
-      expect(Commands.find(payload).constructor.name).toEqual("Teams");
+      expect(commands.find(payload).constructor.name).toEqual("Teams");
     });
   });
 });
