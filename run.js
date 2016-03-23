@@ -43,7 +43,7 @@ let telegram = function() {
     console.log('Hi my name is %s!', me.username);
   });
 
-  bot.onText(/\/(.+)/, (msg, match) => telegramCommands.incomingMessage(msg, match));
+  bot.onText(/(.+)/, (msg, match) => telegramCommands.incomingMessage(msg, match));
 
   bot.on('message', console.log);
 };
