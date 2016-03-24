@@ -322,7 +322,7 @@ describe("Remove command", () => {
       });
 
       it("return text with captains", () => {
-        expect(result.text).toEqual("random <@a1> <@a1>");
+        expect(result.text).toEqual("<@U089DHV6J> lista");
       });
     });
 
@@ -355,7 +355,7 @@ describe("Remove command", () => {
       });
 
       it("return text with captains", () => {
-        expect(result.text).toEqual("random");
+        expect(result.text).toEqual("<@U089DHV6J> lista");
       });
     });
   });
