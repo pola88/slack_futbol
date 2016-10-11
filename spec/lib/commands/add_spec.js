@@ -79,7 +79,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\"", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!! Ahora somos 1: U03BKS790", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!!\nAhora somos 1:\n U03BKS790", type: "message" });
         });
 
         it("saves the user id", done => {
@@ -108,7 +108,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\" and current channel", () => {
-          expect(result).toEqual({ id: result.id, channel: "anotherChannel", text: "Que viva el futbol!! Ahora somos 1: U03BKS790", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "anotherChannel", text: "Que viva el futbol!!\nAhora somos 1:\n U03BKS790", type: "message" });
         });
       });
 
@@ -202,7 +202,7 @@ describe("Add command", () => {
         });
 
         it("returns the payload with text \"Que viva el futbol!!\"", () => {
-          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!! Ahora somos 1: U089DAS89", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!!\nAhora somos 1:\n U089DAS89", type: "message" });
         });
 
         it("saves the user id", done => {
