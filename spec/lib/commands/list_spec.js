@@ -74,7 +74,7 @@ describe("List command", () => {
     });
 
     it("returns the payload with the players", () => {
-      let expectedText = "Por ahora somos 3:\na1\na2\na3";
+      let expectedText = "Por ahora somos 3: a1, a2, a3";
       expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: expectedText, type: "message" });
     });
   });
