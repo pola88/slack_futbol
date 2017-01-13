@@ -97,12 +97,24 @@ describe("Random command", () => {
                         pgConnection.query( query, () => {
                           query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a9','now()','now()')";
                           pgConnection.query( query, () => {
-                            random.run()
-                                  .then( res => {
-                                    result = res;
+                            query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a10','now()','now()')";
+                            pgConnection.query( query, () => {
+                              query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a11','now()','now()')";
+                              pgConnection.query( query, () => {
+                                query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a12','now()','now()')";
+                                pgConnection.query( query, () => {
+                                  query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a13','now()','now()')";
+                                  pgConnection.query( query, () => {
+                                    random.run()
+                                          .then( res => {
+                                            result = res;
 
-                                    done();
+                                            done();
+                                          });
                                   });
+                                });
+                              });
+                            });
                           });
                         });
                       });
@@ -123,11 +135,11 @@ describe("Random command", () => {
         let query;
         query = "SELECT count(*) FROM players WHERE team = 'A';";
         pgConnection.query( query, (errorTeamA, queryTeamA) => {
-          expect(queryTeamA.rows[0].count).toEqual("5");
+          expect(queryTeamA.rows[0].count).toEqual("6");
 
           query = "SELECT count(*) FROM players WHERE team = 'B';";
           pgConnection.query( query, (errorTeamB, queryTeamB) => {
-            expect(queryTeamB.rows[0].count).toEqual("4");
+            expect(queryTeamB.rows[0].count).toEqual("6");
             done();
           });
         });

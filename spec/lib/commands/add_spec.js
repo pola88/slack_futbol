@@ -169,7 +169,7 @@ describe("Add command", () => {
         });
 
         it("returns the error text", () => {
-          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Tarde!! Ya estamos los 12!! Pero todo tiene un precio :wink:", type: "message" });
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Al banco, por ahi el Paton te da una oportunidad...nosotros te llamamos...", type: "message" });
         });
       });
     }); // with "juego"

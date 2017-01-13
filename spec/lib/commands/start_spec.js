@@ -109,5 +109,41 @@ describe("Start command", () => {
         expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! ya estamos los 12: <@a1>, <@a2>, <@a3>, <@a4>, <@a5>, <@a6>, <@a7>, <@a8>, <@a9>, <@a10>, <@a11>, <@a12>. si alguien se baja, avise.../);
       });
     });
+
+    describe("with bigger than 12 players", () => {
+      beforeAll(done => {
+        jasmine.cleanDb( () => {
+          start = new Start(payload);
+          spyOn(start, "_buildPayload").and.callThrough();
+
+          let callback = _.after(12, () => {
+            start.run()
+                .then( res => {
+                  result = res;
+
+                  done();
+                });
+          });
+
+          _.times(13, i => {
+            let currentId = i + 1;
+            let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('a${currentId}','now()','now()')`;
+            pgConnection.query( query, () => {
+              callback();
+            });
+          });
+        });
+      });
+
+      it("calls the _buildPayload method", () => {
+        expect(start._buildPayload).toHaveBeenCalled();
+      });
+
+      it("returns the payload with the players", () => {
+        expect(result.channel).toEqual("C03CFASU7");
+        expect(result.type).toEqual("message");
+        expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! ya estamos los 12: <@a1>, <@a2>, <@a3>, <@a4>, <@a5>, <@a6>, <@a7>, <@a8>, <@a9>, <@a10>, <@a11>, <@a12>. Esperando la llamada del Paton: <@a13>/);
+      });
+    });
   });
 });
