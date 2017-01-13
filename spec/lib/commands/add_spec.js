@@ -172,6 +172,35 @@ describe("Add command", () => {
           expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Al banco, por ahi el Paton te da una oportunidad...nosotros te llamamos...", type: "message" });
         });
       });
+
+      describe("with 13 players", () => {
+        beforeAll(done => {
+          jasmine.cleanDb( () => {
+            add = new Add(payload);
+            spyOn(add, "_buildPayload").and.callThrough();
+
+            let created = _.after(12, () => {
+              add.run()
+                  .then( res => {
+                    result = res;
+
+                    done();
+                  });
+            });
+
+            let query;
+            _.times(13, (n) => {
+              query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('a${n}','now()','now()')`;
+              pgConnection.query( query, created);
+            });
+
+          });
+        });
+
+        it("returns the error text", () => {
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Al banco, por ahi el Paton te da una oportunidad...nosotros te llamamos...", type: "message" });
+        });
+      });
     }); // with "juego"
 
     describe("with \"juega <usuario>\"", () => {
