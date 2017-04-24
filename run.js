@@ -11,15 +11,21 @@ let startSlack = function(callback) {
   let deferred = Q.defer();
   let apiToken = process.env.PBOT_APITOKEN;
 
-  let controller = Botkit.slackbot({ send_via_rtm: true });
+  let controller = Botkit.slackbot({
+    send_via_rtm: true,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    scopes: ['bot'],
+  });
 
   let bot = controller.spawn({
-    token: apiToken
-  })
+    token: process.env.PBOT_APITOKEN
+  });
 
   let slackConnection;
   bot.startRTM( (err,bot,payload) => {
     if (err) {
+      console.log(err);
       throw new Error('Could not connect to Slack');
     }
 
