@@ -37,19 +37,25 @@ describe("Command command", () => {
     });
 
     it("returns the payload with the same text", done => {
-      command.run()
-          .then( result => {
-            expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "same text", type: "message" });
-            done();
-          });
+      command.bot = {
+        send: (_payload, result) => {
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "same text", type: "message" });
+          done();
+        }
+      };
+
+      command.run();
     });
 
     it("calls the _buildPayload method", done => {
-      command.run()
-          .then( () => {
-            expect(command._buildPayload).toHaveBeenCalled();
-            done();
-          });
+      command.bot = {
+        send: () => {
+          expect(command._buildPayload).toHaveBeenCalled();
+          done();
+        }
+      };
+
+      command.run();
     });
   });
 
