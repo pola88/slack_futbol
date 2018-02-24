@@ -59,8 +59,8 @@ describe("List command", () => {
             pgConnection.query( query, () => {
               query = "INSERT INTO players (user_name, created_at, updated_at) VALUES ('no_slack','now()','now()')";
               pgConnection.query( query, () => {
-                list.slack = {
-                  replyWithTyping: (_payload, text) => {
+                list.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();

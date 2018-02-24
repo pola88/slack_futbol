@@ -50,8 +50,8 @@ describe("Teams command", () => {
                 pgConnection.query( query, () => {
                   query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a5','now()','now()')";
                   pgConnection.query( query, () => {
-                    team.slack = {
-                      replyWithTyping: (_payload, text) => {
+                    team.bot = {
+                      send: (_payload, text) => {
                         result = text;
 
                         done();
@@ -102,8 +102,8 @@ describe("Teams command", () => {
                           pgConnection.query( query, () => {
                             query = "INSERT INTO players (user_name, team, created_at, updated_at) VALUES ('fakeUser','B','now()','now()')";
                             pgConnection.query( query, () => {
-                              team.slack = {
-                                replyWithTyping: (_payload, text) => {
+                              team.bot = {
+                                send: (_payload, text) => {
                                   result = text;
 
                                   done();

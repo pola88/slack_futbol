@@ -64,8 +64,8 @@ describe("Add command", () => {
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "me").and.callThrough();
-            add.slack = {
-              replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: (_payload, text) => {
                 result = text;
 
                 done();
@@ -102,8 +102,8 @@ describe("Add command", () => {
           jasmine.cleanDb( () => {
             payload.channel = "anotherChannel";
             add = new Add(payload);
-            add.slack = {
-              replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: (_payload, text) => {
                 result = text;
 
                 done();
@@ -123,10 +123,10 @@ describe("Add command", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             add = new Add(payload);
-            add.slack = {
-              replyWithTyping: () => {
-                add.slack = {
-                  replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();
@@ -164,8 +164,8 @@ describe("Add command", () => {
             spyOn(add, "_buildPayload").and.callThrough();
 
             let created = _.after(12, () => {
-              add.slack = {
-                replyWithTyping: (_payload, text) => {
+              add.bot = {
+                send: (_payload, text) => {
                   result = text;
 
                   done();
@@ -196,8 +196,8 @@ describe("Add command", () => {
             spyOn(add, "_buildPayload").and.callThrough();
 
             let created = _.after(12, () => {
-              add.slack = {
-                replyWithTyping: (_payload, text) => {
+              add.bot = {
+                send: (_payload, text) => {
                   result = text;
 
                   done();
@@ -235,8 +235,8 @@ describe("Add command", () => {
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "another").and.callThrough();
-            add.slack = {
-              replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: (_payload, text) => {
                 result = text;
 
                 done();
@@ -283,10 +283,10 @@ describe("Add command", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             add = new Add(payload);
-            add.slack = {
-              replyWithTyping: () => {
-                add.slack = {
-                  replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();
@@ -322,10 +322,10 @@ describe("Add command", () => {
           jasmine.cleanDb( () => {
             payload.text = `juega`;
             add = new Add(payload);
-            add.slack = {
-              replyWithTyping: () => {
-                add.slack = {
-                  replyWithTyping: (_payload, text) => {
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();
@@ -356,14 +356,14 @@ describe("Add command", () => {
       }); //without user
     }); // with "juega usuario"
 
-    describe("User is not in slack", () => {
+    describe("User is not in bot", () => {
       beforeAll( done => {
         jasmine.cleanDb( () => {
           payload.text = `juega @fakeUser`;
           add = new Add(payload);
 
-          add.slack = {
-            replyWithTyping: (_payload, text) => {
+          add.bot = {
+            send: (_payload, text) => {
               result = text;
 
               done();

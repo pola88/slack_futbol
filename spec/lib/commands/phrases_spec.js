@@ -45,8 +45,8 @@ describe("Phrase command", () => {
     });
 
     it("returns the payload with text", done => {
-      phrase.slack = {
-        replyWithTyping: (_payload, result) => {
+      phrase.bot = {
+        send: (_payload, result) => {
           expect(result.id).toEqual(result.id);
           expect(result.channel).toEqual("C03CFASU7");
           expect(result.text).not.toEqual(undefined);
@@ -69,8 +69,8 @@ describe("Phrase command", () => {
       });
 
       it("returns the payload with text and current channel", done => {
-        phrase.slack = {
-          replyWithTyping: (_payload, result) => {
+        phrase.bot = {
+          send: (_payload, result) => {
             expect(result.id).toEqual(result.id);
             expect(result.channel).toEqual("anotherChannel");
             expect(result.text).not.toEqual(undefined);

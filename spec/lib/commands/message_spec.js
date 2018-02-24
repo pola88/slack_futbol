@@ -45,8 +45,8 @@ describe("Message command", () => {
     });
 
     it("returns the payload with text 'Algo'", done => {
-      message.slack = {
-        replyWithTyping: (_payload, result) => {
+      message.bot = {
+        send: (_payload, result) => {
           expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
 
           done();
@@ -63,8 +63,8 @@ describe("Message command", () => {
       });
 
       it("returns the payload with text 'Alog' and channel 'C03CFASU7'", done => {
-        message.slack = {
-          replyWithTyping: (_payload, result) => {
+        message.bot = {
+          send: (_payload, result) => {
             expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
 
             done();

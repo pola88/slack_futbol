@@ -41,8 +41,8 @@ describe("Help command", () => {
     });
 
     it("returns the payload with menu", done => {
-      help.slack = {
-        replyWithTyping: (_payload, result) => {
+      help.bot = {
+        send: (_payload, result) => {
           let expectedText = "Vos decime y te digo: \n";
           expectedText += "* `hora` _Cuando se juega_ \n";
           expectedText += "* `quienes` `lista` `jugadores` _Quienes juegan_ \n";

@@ -19,7 +19,6 @@
     "lodash": "4.17.5",
     "node-telegram-bot-api": "0.30.0",
     "pg": "4.4.0",
-    "q": "1.4.1",
     "request-promise": "0.4.3",
     "winston": "2.2.0"
   },

@@ -50,8 +50,8 @@ describe("Random command", () => {
                 pgConnection.query( query, () => {
                   query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a5','now()','now()')";
                   pgConnection.query( query, () => {
-                    random.slack = {
-                      replyWithTyping: (_payload, text) => {
+                    random.bot = {
+                      send: (_payload, text) => {
                         result = text;
 
                         done();
@@ -108,8 +108,8 @@ describe("Random command", () => {
                                 pgConnection.query( query, () => {
                                   query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a13','now()','now()')";
                                   pgConnection.query( query, () => {
-                                    random.slack = {
-                                      replyWithTyping: (_payload, text) => {
+                                    random.bot = {
+                                      send: (_payload, text) => {
                                         result = text;
 
                                         done();
@@ -178,8 +178,8 @@ describe("Random command", () => {
                         pgConnection.query( query, () => {
                           query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a9','now()','now()')";
                           pgConnection.query( query, () => {
-                            random.slack = {
-                              replyWithTyping: (_payload, text) => {
+                            random.bot = {
+                              send: (_payload, text) => {
                                 result = text;
 
                                 done();

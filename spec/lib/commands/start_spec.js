@@ -51,8 +51,8 @@ describe("Start command", () => {
             pgConnection.query( query, () => {
               query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a3','now()','now()')";
               pgConnection.query( query, () => {
-                start.slack = {
-                  replyWithTyping: (_payload, text) => {
+                start.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();
@@ -85,8 +85,8 @@ describe("Start command", () => {
           let callback = _.after(11, () => {
             let query = `INSERT INTO players (user_name, created_at, updated_at) VALUES ('userNameFake','now()','now()')`;
             pgConnection.query( query, () => {
-              start.slack = {
-                replyWithTyping: (_payload, text) => {
+              start.bot = {
+                send: (_payload, text) => {
                   result = text;
 
                   done();
@@ -123,8 +123,8 @@ describe("Start command", () => {
           spyOn(start, "_buildPayload").and.callThrough();
 
           let callback = _.after(12, () => {
-            start.slack = {
-              replyWithTyping: (_payload, text) => {
+            start.bot = {
+              send: (_payload, text) => {
                 result = text;
 
                 done();

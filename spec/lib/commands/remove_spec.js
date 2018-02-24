@@ -58,8 +58,8 @@ describe("Remove command", () => {
               remove = new Remove(payload);
               spyOn(remove, "_buildPayload").and.callThrough();
               spyOn(remove, "me").and.callThrough();
-              remove.slack = {
-                replyWithTyping: (_payload, text) => {
+              remove.bot = {
+                send: (_payload, text) => {
                   result = text;
 
                   done();
@@ -99,10 +99,10 @@ describe("Remove command", () => {
 
             pgConnection.query( query, () => {
               remove = new Remove(payload);
-              remove.slack = {
-                replyWithTyping: () => {
-                  remove.slack = {
-                    replyWithTyping: (_payload, text) => {
+              remove.bot = {
+                send: () => {
+                  remove.bot = {
+                    send: (_payload, text) => {
                       result = text;
 
                       done();
@@ -154,8 +154,8 @@ describe("Remove command", () => {
                 remove = new Remove(payload);
                 spyOn(remove, "_buildPayload").and.callThrough();
                 spyOn(remove, "another").and.callThrough();
-                remove.slack = {
-                  replyWithTyping: (_payload, text) => {
+                remove.bot = {
+                  send: (_payload, text) => {
                     result = text;
 
                     done();
@@ -210,10 +210,10 @@ describe("Remove command", () => {
 
               pgConnection.query( query, () => {
                 remove = new Remove(payload);
-                remove.slack = {
-                  replyWithTyping: () => {
-                    remove.slack = {
-                      replyWithTyping: (_payload, text) => {
+                remove.bot = {
+                  send: () => {
+                    remove.bot = {
+                      send: (_payload, text) => {
                         result = text;
 
                         done();
@@ -246,13 +246,13 @@ describe("Remove command", () => {
         });
       }); //The user has been removeed
 
-      describe("the user is not in slack", () => {
+      describe("the user is not in bot", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             payload.text = `baja @fakeUser`;
             remove = new Remove(payload);
-            remove.slack = {
-              replyWithTyping: (_payload, text) => {
+            remove.bot = {
+              send: (_payload, text) => {
                 result = text;
 
                 done();
@@ -266,7 +266,7 @@ describe("Remove command", () => {
         it("returns the payload with msg", () => {
           expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Nunca tuviste huevos para anotarte", type: "message" });
         });
-      }); //the user is not in slack
+      }); //the user is not in bot
 
       describe("remove with userName", () => {
         beforeAll( done => {
@@ -277,8 +277,8 @@ describe("Remove command", () => {
               payload.text = `baja fakeUser`;
               remove = new Remove(payload);
 
-              remove.slack = {
-                replyWithTyping: (_payload, text) => {
+              remove.bot = {
+                send: (_payload, text) => {
                   result = text;
 
                   done();
