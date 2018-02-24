@@ -51,12 +51,14 @@ describe("Start command", () => {
             pgConnection.query( query, () => {
               query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a3','now()','now()')";
               pgConnection.query( query, () => {
-                start.run()
-                    .then( res => {
-                      result = res;
+                start.slack = {
+                  replyWithTyping: (_payload, text) => {
+                    result = text;
 
-                      done();
-                    });
+                    done();
+                  }
+                };
+                start.run();
               });
             });
           });
@@ -80,18 +82,22 @@ describe("Start command", () => {
           start = new Start(payload);
           spyOn(start, "_buildPayload").and.callThrough();
 
-          let callback = _.after(12, () => {
-            start.run()
-                .then( res => {
-                  result = res;
+          let callback = _.after(11, () => {
+            let query = `INSERT INTO players (user_name, created_at, updated_at) VALUES ('userNameFake','now()','now()')`;
+            pgConnection.query( query, () => {
+              start.slack = {
+                replyWithTyping: (_payload, text) => {
+                  result = text;
 
                   done();
-                });
+                }
+              };
+              start.run();
+            });
           });
 
-          _.times(12, i => {
-            let currentId = i + 1;
-            let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('a${currentId}','now()','now()')`;
+          _.times(11, i => {
+            let query = `INSERT INTO players (user_id, created_at, updated_at) VALUES ('a${i + 1}','now()','now()')`;
             pgConnection.query( query, () => {
               callback();
             });
@@ -106,7 +112,7 @@ describe("Start command", () => {
       it("returns the payload with the players", () => {
         expect(result.channel).toEqual("C03CFASU7");
         expect(result.type).toEqual("message");
-        expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! ya estamos los 12: <@a1>, <@a2>, <@a3>, <@a4>, <@a5>, <@a6>, <@a7>, <@a8>, <@a9>, <@a10>, <@a11>, <@a12>. si alguien se baja, avise.../);
+        expect(result.text).toMatch(/<\!channel> "_.*_", que viva el futbol!!! ya estamos los 12: <@a1>, <@a2>, <@a3>, <@a4>, <@a5>, <@a6>, <@a7>, <@a8>, <@a9>, <@a10>, <@a11>, userNameFake. si alguien se baja, avise.../);
       });
     });
 
@@ -117,12 +123,14 @@ describe("Start command", () => {
           spyOn(start, "_buildPayload").and.callThrough();
 
           let callback = _.after(12, () => {
-            start.run()
-                .then( res => {
-                  result = res;
+            start.slack = {
+              replyWithTyping: (_payload, text) => {
+                result = text;
 
-                  done();
-                });
+                done();
+              }
+            };
+            start.run();
           });
 
           _.times(13, i => {

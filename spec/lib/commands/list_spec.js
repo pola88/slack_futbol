@@ -57,12 +57,18 @@ describe("List command", () => {
           pgConnection.query( query, () => {
             query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a3','now()','now()')";
             pgConnection.query( query, () => {
-              list.run()
-                  .then( res => {
-                    result = res;
+              query = "INSERT INTO players (user_name, created_at, updated_at) VALUES ('no_slack','now()','now()')";
+              pgConnection.query( query, () => {
+                list.slack = {
+                  replyWithTyping: (_payload, text) => {
+                    result = text;
 
                     done();
-                  });
+                  }
+                };
+
+                list.run();
+              });
             });
           });
         });
@@ -74,7 +80,7 @@ describe("List command", () => {
     });
 
     it("returns the payload with the players", () => {
-      let expectedText = "Por ahora somos 3: a1, a2, a3";
+      let expectedText = "Por ahora somos 4: no_slack, a1, a2, a3";
       expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: expectedText, type: "message" });
     });
   });

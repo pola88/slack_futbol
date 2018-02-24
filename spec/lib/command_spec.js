@@ -15,10 +15,6 @@ describe("Command", () => {
   });
 
   describe("find", () => {
-    it("returns Time command", () => {
-      payload.text = "Hora";
-      expect(commands.find(payload).constructor.name).toEqual("Time");
-    });
 
     it("returns Add command", () => {
       payload.text = "Juego";
@@ -48,11 +44,6 @@ describe("Command", () => {
     it("invalid command", () => {
       payload.text = "Fake";
       expect(commands.find(payload)).toEqual(null);
-    });
-
-    it("returns Rain command", () => {
-      payload.text = "dicen que llueve";
-      expect(commands.find(payload).constructor.name).toEqual("Rain");
     });
 
     it("returns Start command", () => {

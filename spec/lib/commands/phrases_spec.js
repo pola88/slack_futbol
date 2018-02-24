@@ -45,18 +45,21 @@ describe("Phrase command", () => {
     });
 
     it("returns the payload with text", done => {
-      phrase.run()
-          .then( result => {
-            expect(result.id).toEqual(result.id);
-            expect(result.channel).toEqual("C03CFASU7");
-            expect(result.text).not.toEqual(undefined);
-            expect(result.text).not.toEqual("");
-            expect(result.text).toMatch(/_.*_/);
-            expect(result.text).not.toEqual(null);
-            expect(result.type).toEqual("message");
+      phrase.slack = {
+        replyWithTyping: (_payload, result) => {
+          expect(result.id).toEqual(result.id);
+          expect(result.channel).toEqual("C03CFASU7");
+          expect(result.text).not.toEqual(undefined);
+          expect(result.text).not.toEqual("");
+          expect(result.text).toMatch(/_.*_/);
+          expect(result.text).not.toEqual(null);
+          expect(result.type).toEqual("message");
 
-            done();
-          });
+          done();
+        }
+      };
+
+      phrase.run();
     });
 
     describe("Different channel id", () => {
@@ -66,18 +69,21 @@ describe("Phrase command", () => {
       });
 
       it("returns the payload with text and current channel", done => {
-        phrase.run()
-            .then( result => {
-              expect(result.id).toEqual(result.id);
-              expect(result.channel).toEqual("anotherChannel");
-              expect(result.text).not.toEqual(undefined);
-              expect(result.text).not.toEqual("");
-              expect(result.text).toMatch(/_.*_/);
-              expect(result.text).not.toEqual(null);
-              expect(result.type).toEqual("message");
+        phrase.slack = {
+          replyWithTyping: (_payload, result) => {
+            expect(result.id).toEqual(result.id);
+            expect(result.channel).toEqual("anotherChannel");
+            expect(result.text).not.toEqual(undefined);
+            expect(result.text).not.toEqual("");
+            expect(result.text).toMatch(/_.*_/);
+            expect(result.text).not.toEqual(null);
+            expect(result.type).toEqual("message");
 
-              done();
-            });
+            done();
+          }
+        };
+
+        phrase.run();
       });
     });
   });

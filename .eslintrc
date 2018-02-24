@@ -18,6 +18,7 @@
     "describe": false,
     "xdescribe": false,
     "it": false,
+    "xit": false,
     "jasmine": true,
     "beforeEach": false,
     "beforeAll": false,

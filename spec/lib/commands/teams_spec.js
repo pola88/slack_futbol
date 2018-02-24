@@ -50,12 +50,15 @@ describe("Teams command", () => {
                 pgConnection.query( query, () => {
                   query = "INSERT INTO players (user_id, created_at, updated_at) VALUES ('a5','now()','now()')";
                   pgConnection.query( query, () => {
-                    team.run()
-                          .then( res => {
-                            result = res;
+                    team.slack = {
+                      replyWithTyping: (_payload, text) => {
+                        result = text;
 
-                            done();
-                          });
+                        done();
+                      }
+                    };
+
+                    team.run();
                   });
                 });
               });
@@ -97,12 +100,18 @@ describe("Teams command", () => {
                         pgConnection.query( query, () => {
                           query = "INSERT INTO players (user_id, team, created_at, updated_at) VALUES ('a9','B','now()','now()')";
                           pgConnection.query( query, () => {
-                            team.run()
-                                  .then( res => {
-                                    result = res;
+                            query = "INSERT INTO players (user_name, team, created_at, updated_at) VALUES ('fakeUser','B','now()','now()')";
+                            pgConnection.query( query, () => {
+                              team.slack = {
+                                replyWithTyping: (_payload, text) => {
+                                  result = text;
 
-                                    done();
-                                  });
+                                  done();
+                                }
+                              };
+
+                              team.run();
+                            });
                           });
                         });
                       });
