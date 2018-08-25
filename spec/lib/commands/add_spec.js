@@ -64,12 +64,15 @@ describe("Add command", () => {
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "me").and.callThrough();
-            add.run()
-                .then( res => {
-                  result = res;
+            add.bot = {
+              send: (_payload, text) => {
+                result = text;
 
-                  done();
-                });
+                done();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -99,11 +102,15 @@ describe("Add command", () => {
           jasmine.cleanDb( () => {
             payload.channel = "anotherChannel";
             add = new Add(payload);
-            add.run()
-                .then( res => {
-                  result = res;
-                  done();
-                });
+            add.bot = {
+              send: (_payload, text) => {
+                result = text;
+
+                done();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -116,14 +123,20 @@ describe("Add command", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             add = new Add(payload);
-            add.run()
-                .then( () => {
-                  add.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
+                    result = text;
+
+                    done();
+                  }
+                };
+                add.run();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -151,12 +164,15 @@ describe("Add command", () => {
             spyOn(add, "_buildPayload").and.callThrough();
 
             let created = _.after(12, () => {
-              add.run()
-                  .then( res => {
-                    result = res;
+              add.bot = {
+                send: (_payload, text) => {
+                  result = text;
 
-                    done();
-                  });
+                  done();
+                }
+              };
+
+              add.run();
             });
 
             let query;
@@ -180,12 +196,15 @@ describe("Add command", () => {
             spyOn(add, "_buildPayload").and.callThrough();
 
             let created = _.after(12, () => {
-              add.run()
-                  .then( res => {
-                    result = res;
+              add.bot = {
+                send: (_payload, text) => {
+                  result = text;
 
-                    done();
-                  });
+                  done();
+                }
+              };
+
+              add.run();
             });
 
             let query;
@@ -203,7 +222,7 @@ describe("Add command", () => {
       });
     }); // with "juego"
 
-    describe("with \"juega <usuario>\"", () => {
+    describe("with \"juega <@usuario>\"", () => {
       let userId = "U089DAS89";
 
       beforeEach( () => {
@@ -216,12 +235,15 @@ describe("Add command", () => {
             add = new Add(payload);
             spyOn(add, "_buildPayload").and.callThrough();
             spyOn(add, "another").and.callThrough();
-            add.run()
-                .then( res => {
-                  result = res;
+            add.bot = {
+              send: (_payload, text) => {
+                result = text;
 
-                  done();
-                });
+                done();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -261,14 +283,20 @@ describe("Add command", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             add = new Add(payload);
-            add.run()
-                .then( () => {
-                  add.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
+                    result = text;
+
+                    done();
+                  }
+                };
+                add.run();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -294,14 +322,20 @@ describe("Add command", () => {
           jasmine.cleanDb( () => {
             payload.text = `juega`;
             add = new Add(payload);
-            add.run()
-                .then( () => {
-                  add.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
+            add.bot = {
+              send: () => {
+                add.bot = {
+                  send: (_payload, text) => {
+                    result = text;
+
+                    done();
+                  }
+                };
+                add.run();
+              }
+            };
+
+            add.run();
           });
         });
 
@@ -320,71 +354,41 @@ describe("Add command", () => {
           });
         });
       }); //without user
-
-      describe("invalid user", () => {
-        beforeAll( done => {
-          jasmine.cleanDb( () => {
-            payload.text = `juega @fakeUser`;
-            add = new Add(payload);
-            add.run()
-                .then( () => {
-                  add.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
-          });
-        });
-
-        it("returns the payload with error text", () => {
-          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
-        });
-
-        it("does not save the user who write", done => {
-          let query = `SELECT * FROM players WHERE user_id = '${payload.user}';`;
-
-          pgConnection.query( query, (selectError, selectResult) => {
-            expect(selectError).toEqual(null);
-            expect(selectResult.rows).toEqual([]);
-
-            done();
-          });
-        });
-      }); //invalid user
-
-      describe("without @", () => {
-        beforeAll( done => {
-          jasmine.cleanDb( () => {
-            payload.text = `juega fakeUser`;
-            add = new Add(payload);
-            add.run()
-                .then( () => {
-                  add.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
-          });
-        });
-
-        it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
-        });
-
-        it("does not save the user who write", done => {
-          let query = `SELECT * FROM players WHERE user_id = '${payload.user}';`;
-
-          pgConnection.query( query, (selectError, selectResult) => {
-            expect(selectError).toEqual(null);
-            expect(selectResult.rows).toEqual([]);
-
-            done();
-          });
-        });
-      }); //without @
     }); // with "juega usuario"
+
+    describe("User is not in bot", () => {
+      beforeAll( done => {
+        jasmine.cleanDb( () => {
+          payload.text = `juega @fakeUser`;
+          add = new Add(payload);
+
+          add.bot = {
+            send: (_payload, text) => {
+              result = text;
+
+              done();
+            }
+          };
+
+          add.run();
+        });
+      });
+
+      it("returns the payload with error text", () => {
+        expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Que viva el futbol!!\nAhora somos 1:\n @fakeuser", type: "message" });
+      });
+
+      xit("does not save the user who write", done => {
+        let query = `SELECT * FROM players WHERE user_id = '${payload.user}';`;
+
+        pgConnection.query( query, (selectError, selectResult) => {
+          expect(selectError).toEqual(null);
+          expect(selectResult.rows).toEqual([]);
+
+          done();
+        });
+      });
+    }); //invalid user
   }); // run
 
   xdescribe("after", () => {

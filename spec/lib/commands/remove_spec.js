@@ -58,12 +58,15 @@ describe("Remove command", () => {
               remove = new Remove(payload);
               spyOn(remove, "_buildPayload").and.callThrough();
               spyOn(remove, "me").and.callThrough();
-              remove.run()
-                  .then( res => {
-                    result = res;
+              remove.bot = {
+                send: (_payload, text) => {
+                  result = text;
 
-                    done();
-                  });
+                  done();
+                }
+              };
+
+              remove.run();
             });
           });
         });
@@ -96,20 +99,27 @@ describe("Remove command", () => {
 
             pgConnection.query( query, () => {
               remove = new Remove(payload);
-              remove.run()
-                  .then( () => {
-                    remove.run()
-                        .then( res => {
-                          result = res;
-                          done();
-                        });
-                  });
+              remove.bot = {
+                send: () => {
+                  remove.bot = {
+                    send: (_payload, text) => {
+                      result = text;
+
+                      done();
+                    }
+                  };
+
+                  remove.run();
+                }
+              };
+
+              remove.run();
             });
           });
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Nunca tuviste huevos para anotarte", type: "message" });
         });
 
         it("removes the user id", done => {
@@ -144,12 +154,15 @@ describe("Remove command", () => {
                 remove = new Remove(payload);
                 spyOn(remove, "_buildPayload").and.callThrough();
                 spyOn(remove, "another").and.callThrough();
-                remove.run()
-                    .then( res => {
-                      result = res;
+                remove.bot = {
+                  send: (_payload, text) => {
+                    result = text;
 
-                      done();
-                    });
+                    done();
+                  }
+                };
+
+                remove.run();
               });
             });
           });
@@ -197,21 +210,28 @@ describe("Remove command", () => {
 
               pgConnection.query( query, () => {
                 remove = new Remove(payload);
-                remove.run()
-                    .then( () => {
-                      remove.run()
-                          .then( res => {
-                            result = res;
-                            done();
-                          });
-                    });
+                remove.bot = {
+                  send: () => {
+                    remove.bot = {
+                      send: (_payload, text) => {
+                        result = text;
+
+                        done();
+                      }
+                    };
+
+                    remove.run();
+                  }
+                };
+
+                remove.run();
               });
             });
           });
         });
 
         it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Nunca tuviste huevos para anotarte", type: "message" });
         });
 
         it("does not remove the user who write", done => {
@@ -226,60 +246,56 @@ describe("Remove command", () => {
         });
       }); //The user has been removeed
 
-      describe("invalid user", () => {
+      describe("the user is not in bot", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
             payload.text = `baja @fakeUser`;
             remove = new Remove(payload);
-            remove.run()
-                .then( () => {
-                  remove.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
+            remove.bot = {
+              send: (_payload, text) => {
+                result = text;
+
+                done();
+              }
+            };
+
+            remove.run();
           });
         });
 
-        it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+        it("returns the payload with msg", () => {
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Nunca tuviste huevos para anotarte", type: "message" });
         });
+      }); //the user is not in bot
 
-        it("does not save the user who write", done => {
-          let query = `SELECT * FROM players WHERE user_id = '${payload.user}';`;
-
-          pgConnection.query( query, (selectError, selectResult) => {
-            expect(selectError).toEqual(null);
-            expect(selectResult.rows).toEqual([]);
-
-            done();
-          });
-        });
-      }); //invalid user
-
-      describe("without @", () => {
+      describe("remove with userName", () => {
         beforeAll( done => {
           jasmine.cleanDb( () => {
-            payload.text = `baja fakeUser`;
-            remove = new Remove(payload);
-            remove.run()
-                .then( () => {
-                  remove.run()
-                      .then( res => {
-                        result = res;
-                        done();
-                      });
-                });
+            let query = `INSERT INTO players (user_name, created_at, updated_at) VALUES ('fakeuser','now()','now()')`;
+
+            pgConnection.query( query, () => {
+              payload.text = `baja fakeUser`;
+              remove = new Remove(payload);
+
+              remove.bot = {
+                send: (_payload, text) => {
+                  result = text;
+
+                  done();
+                }
+              };
+
+              remove.run();
+            });
           });
         });
 
-        it("returns the payload with error text", () => {
-          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Falto el nombre o pusiste cualquier cosa, no me hagas perder el tiempo.", type: "message" });
+        it("returns the payload with msg", () => {
+          expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "galgo: Daaaa...posta te vas a bajar?", type: "message" });
         });
 
-        it("does not save the user who write", done => {
-          let query = `SELECT * FROM players WHERE user_id = '${payload.user}';`;
+        it("remove user", done => {
+          let query = `SELECT * FROM players WHERE user_name = 'fakeUser';`;
 
           pgConnection.query( query, (selectError, selectResult) => {
             expect(selectError).toEqual(null);
@@ -288,11 +304,11 @@ describe("Remove command", () => {
             done();
           });
         });
-      }); //without @
-    }); // with "juega usuario"
+      }); //remove with userName
+    }); // with baja <usuario>
   }); // run
 
-  describe("after", () => {
+  xdescribe("after", () => {
     describe("with captains", () => {
       let result;
 

@@ -45,19 +45,15 @@ describe("Message command", () => {
     });
 
     it("returns the payload with text 'Algo'", done => {
-      message.run()
-          .then( result => {
-            expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
-            done();
-          });
-    });
+      message.bot = {
+        send: (_payload, result) => {
+          expect(result).toEqual({id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
 
-    it("calls the _buildPayload method", done => {
-      message.run()
-          .then( () => {
-            expect(message._buildPayload).toHaveBeenCalled();
-            done();
-          });
+          done();
+        }
+      };
+
+      message.run();
     });
 
     describe("Different channel id", () => {
@@ -67,11 +63,15 @@ describe("Message command", () => {
       });
 
       it("returns the payload with text 'Alog' and channel 'C03CFASU7'", done => {
-        message.run()
-            .then( result => {
-              expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
-              done();
-            });
+        message.bot = {
+          send: (_payload, result) => {
+            expect(result).toEqual({ id: result.id, channel: "C03CFASU7", text: "Algo", type: "message" });
+
+            done();
+          }
+        };
+
+        message.run();
       });
     });
   });

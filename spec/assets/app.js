@@ -1,4 +1,3 @@
-require("babel/register");
 var express = require("express");
 var path = require("path");
 require("dotenv").config({path: path.join(__dirname, "../test_env") });
