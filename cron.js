@@ -6,7 +6,7 @@ exports.start = function(connection, callback) {
     //Run once a day at midnight
     cronTime: '00 00 10 * * 1',
     onTick: function() {
-      connection.sendCommand({ text: "start", channel: "C03CFASU7" });
+      connection.incomingMessage({ text: "start", channel: "C03CFASU7" });
     },
     start: false,
     timeZone: 'America/Argentina/Buenos_Aires'
