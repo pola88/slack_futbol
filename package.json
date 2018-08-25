@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "botkit": "^0.5.2",
     "cron": "1.0.9",
     "dotenv": "1.1.0",
